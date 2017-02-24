@@ -10,51 +10,62 @@ class PersonalDetailsApp < Sinatra::Base
     end
 
 
-
     get '/age' do
-        erb :age, :locals=>{user_name=>params[:user_name]}
+        erb :age, :locals => {:user_name => params[:user_name]}
     end
 
     post '/age' do
-        user_age = params[:user_age]
+        age = params[:age]
         user_name = params[:user_name]
-        redirect '/location?user_name=' + user_name + '&user_age' + user_age
+        redirect '/location?user_name=' + user_name + '&age=' + age
     end
 
     get '/location' do
-        erb :location, :locals=>{:user_name=>params[:user_name], :user_age=>params[:user_age]}
+        erb :location, :locals=>{:user_name=>params[:user_name],:age=>params[:age]}
     end
 
     post '/location' do
         user_location = params[:user_location]
-        user_age = params[:user_age]
+        age = params[:age]
         user_name = params[:user_name]
-        redirect '/numbers?user_name=' + user_name + '&user_age' + user_age '&user_location'
+        redirect '/numbers?user_name=' + user_name + '&age=' + age + '&user_location=' + user_location
     end
 
     get '/numbers' do
-        erb :numbers, :locals=>{:user_name=>params[:user_name], :user_age=>params[:user_age],:user_location=>params[:user_location]}
+        erb :numbers, :locals=>{:user_name=>params[:user_name],:age=>params[:age],:user_location=>params[:user_location]}
     end
     post '/numbers' do
         num1 = params[:num1]
         num2 = params[:num2]
         num3 = params[:num3]
-        age = params[:user_age]
-        location = params[:user_location]
-        name = params[:user_name]
-        sum_of_nums = num1.to_i + num2.to_i + num3.to_i
+        user_location = params[:user_location]
+        age = params[:age]
+        user_name = params[:user_name]
+        sum_of_nums = num1 + num2 + num3
 
-        if sum_of_nums > age.to_i
+        if sum_of_nums > age
             age_compare = "Your favorite nums added together is greater than your age"
 
-       elsif sum_of_nums < age.to_i
-           age_compare = "Your favorite nums added together is less than your age"
+        elsif sum_of_nums < age
+            age_compare = "Your favorite nums added together is less than your age"
 
-       else
-           age_compare = "Your favorite nums added together is equal to your age"
+        else
+            age_compare = "Your favorite nums added together is equal to your age"
+    end
+        redirect '/favorites?num1=' + num1 + '&num2=' + num2 + '&num3=' + num3 + '&user_name=' + user_name + '&ageshows=' + age + '&user_location=' + user_location
+    end
 
-       end
+    get '/favorites' do
+        erb :favorites, :locals=>{:user_name=>params[:user_name], :age=>params[:age],:user_location=>params[:user_location],:num1=>params[:num1],:num2=>params[:num2],:num3=>params[:num3]}
+    end
 
-       erb :numbers
+    post '/favorites' do
+        num1 = params[:num1]
+        num2 = params[:num2]
+        num3 = params[:num3]
+        user_location = params[:user_location]
+        age = params[:age]
+        user_name = params[:user_name]
+        sum_of_nums = num1.to_i + num2.to_i + num3.to_i
     end
 end
