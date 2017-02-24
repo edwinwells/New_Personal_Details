@@ -41,31 +41,31 @@ class PersonalDetailsApp < Sinatra::Base
         user_location = params[:user_location]
         age = params[:age]
         user_name = params[:user_name]
-        sum_of_nums = num1 + num2 + num3
 
-        if sum_of_nums > age
-            age_compare = "Your favorite nums added together is greater than your age"
-
-        elsif sum_of_nums < age
-            age_compare = "Your favorite nums added together is less than your age"
-
-        else
-            age_compare = "Your favorite nums added together is equal to your age"
-    end
-        redirect '/favorites?num1=' + num1 + '&num2=' + num2 + '&num3=' + num3 + '&user_name=' + user_name + '&ageshows=' + age + '&user_location=' + user_location
+        redirect '/favorites?num1=' + num1 + '&num2=' + num2 + '&num3=' + num3 + '&user_name=' + user_name + '&age=' + age + '&user_location=' + user_location
     end
 
     get '/favorites' do
-        erb :favorites, :locals=>{:user_name=>params[:user_name], :age=>params[:age],:user_location=>params[:user_location],:num1=>params[:num1],:num2=>params[:num2],:num3=>params[:num3]}
-    end
-
-    post '/favorites' do
         num1 = params[:num1]
         num2 = params[:num2]
         num3 = params[:num3]
         user_location = params[:user_location]
         age = params[:age]
         user_name = params[:user_name]
+        # sum_of_nums = params [:num1] + params[:num2] + params[:num3]
+
         sum_of_nums = num1.to_i + num2.to_i + num3.to_i
+
+        if sum_of_nums > age.to_i
+            age_compare = "Your favorite numbers added together are greater than your age"
+
+        elsif sum_of_nums < age.to_i
+            age_compare = "Your favorite numbers added together are less than your age"
+
+        else
+            age_compare = "Your favorite numbers added together are equal to your age"
+        end
+            erb :favorites, :locals=>{:user_name=>params[:user_name], :age=>params[:age],:user_location=>params[:user_location],:num1=>params[:num1],:num2=>params[:num2],:num3=>params[:num3],:age_compare=>age_compare}
     end
+
 end
