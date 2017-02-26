@@ -57,15 +57,15 @@ class PersonalDetailsApp < Sinatra::Base
         sum_of_nums = num1.to_i + num2.to_i + num3.to_i
 
         if sum_of_nums > age.to_i
-            age_compare = "Your favorite numbers added together are greater than your age"
+            age_compare = "Your favorite numbers added together are greater than your age!"
 
         elsif sum_of_nums < age.to_i
-            age_compare = "Your favorite numbers added together are less than your age"
+            age_compare = "Your favorite numbers added together are less than your age!"
 
         else
-            age_compare = "Your favorite numbers added together are equal to your age"
+            age_compare = "Your favorite numbers added together are equal to your age!"
         end
-            erb :favorites, :locals=>{:user_name=>params[:user_name], :age=>params[:age],:user_location=>params[:user_location],:num1=>params[:num1],:num2=>params[:num2],:num3=>params[:num3],:age_compare=>age_compare}
+            erb :favorites, :locals=>{:user_name=>params[:user_name], :age=>params[:age],:user_location=>params[:user_location],:num1=>params[:num1],:num2=>params[:num2],:num3=>params[:num3],:age_compare=>age_compare,:sum_of_nums=>sum_of_nums}
     end
 
 end
