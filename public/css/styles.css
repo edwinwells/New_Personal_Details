@@ -4,6 +4,7 @@ color: blue;
 }
 
 .center{
+border-bottom: 5px double grey;
 text-align: center;
 
 }
