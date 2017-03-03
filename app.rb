@@ -6,7 +6,7 @@ class PersonalDetailsApp < Sinatra::Base
 
     post '/name' do
         name = params[:name]
-        redirect '/age?user_name=' + name
+        redirect '/age?name=' + name
     end
 
 
